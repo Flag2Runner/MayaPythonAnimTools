@@ -7,10 +7,15 @@ string $pluginDir = `dirname($installerPath)`;
 
 string $pluginSrcDir = $pluginDir + "/src/";
 
+string $pluginAssetDir = $pluginDir + "/assets/";
+
 global proc AddShelfBtnForTool(string $srcFileName)
 {
     global string $pluginSrcDir;
+    global string $pluginAssetDir;
     string $srcFilePath = $pluginSrcDir + $srcFileName + ".py";
+
+    string $iconPath = $pluginAssetDir + $srcFileName + ".png";
 
     //Get current active shelf
     string $currentShelf = `tabLayout -q -selectTab "ShelfLayout"`;
@@ -18,7 +23,7 @@ global proc AddShelfBtnForTool(string $srcFileName)
     setParent $currentShelf;
 
     string $command = "exec(open(\""+$srcFilePath+"\").read())";
-    shelfButton -c $command -stp "python";
+    shelfButton -c $command -stp "python" -image $iconPath;
 }
 
 AddShelfBtnForTool("CreateController");
