@@ -1,0 +1,27 @@
+global proc FileLocator(){}; //this is a dummy function, we will ask maya what this is
+string $fileLocatorInfo = `whatIs FileLocator`;
+
+string $installerPath = `substring $fileLocatorInfo 25 999`;
+
+string $pluginDir = `dirname($installerPath)`;
+
+string $pluginSrcDir = $pluginDir + "/src/";
+
+global proc AddShelfBtnForTool(string $srcFileName)
+{
+    global string $pluginSrcDir;
+    string $srcFilePath = $pluginSrcDir + $srcFileName + ".py";
+
+    //Get current active shelf
+    string $currentShelf = `tabLayout -q -selectTab "ShelfLayout"`;
+    //set the parent for the next ui elements to be in the current shelf
+    setParent $currentShelf;
+
+    string $command = "exec(open(\""+$srcFilePath+"\").read())";
+    shelfButton -c $command -stp "python";
+}
+
+AddShelfBtnForTool("CreateController");
+AddShelfBtnForTool("GhostPoser");
+AddShelfBtnForTool("MayaToUE");
+AddShelfBtnForTool("ProxyBuilder");
