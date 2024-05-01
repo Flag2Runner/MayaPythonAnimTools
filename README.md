@@ -9,7 +9,7 @@ This is a collection of tools I developed to help with the animation process in 
 
 * Drag the install.mel to maya's viewport
 
-## Insructions:
+## Instructions:
 > [!NOTE]
 > This installer is not complete yet!!!
 
