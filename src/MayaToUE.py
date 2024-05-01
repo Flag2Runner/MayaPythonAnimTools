@@ -3,6 +3,7 @@ from PySide2.QtCore import QRegExp, Signal
 from PySide2.QtGui import QIntValidator, QRegExpValidator
 import maya.cmds as mc
 from PySide2.QtWidgets import QCheckBox, QFileDialog, QLineEdit, QSizePolicy, QWidget, QPushButton, QListWidget, QAbstractItemView, QLabel, QHBoxLayout, QVBoxLayout, QMessageBox
+import MayaDev
 
 class AnimClip:
     def __init__(self):
@@ -64,7 +65,12 @@ class MayaToUE:
 
             mc.playbackOptions(e=True, min = startFrame, max = endFrame)
             mc.FBXExport('-f', animExportPath, '-s', True, '-ea', True)
+            
+            self.SendToUnreal()
 
+    def SendToUnreal(self):
+        pass
+    
     def GetAnimationFolderPath(self):
         path = os.path.join(self.saveDir, self.GetAnimFolderName())
         return os.path.normpath(path)
